@@ -12,6 +12,9 @@ import subprocess
 import flask, flask.views
 from pymongo import MongoClient
 
+# Establish connection to MongoDB
+connection = MongoClient(os.environ['MONGOHQ_URL'])
+
 from python.main import Main
 from python.graph import GraphData
 from python.shutdown import Shutdown
@@ -19,18 +22,12 @@ from python.setup import Setup
 from python.filter import Filter
 from python.details import Details
 
-# MongoDB server startup
-subprocess.Popen(['C:\\mongodb\\bin\\mongod', '--config', 'c:\\mongodb\\bin\\mongodb.config'])
 
 # Create Flask Instance
 app = flask.Flask(__name__)
 
-# Establish connection to MongoDB
-connection = MongoClient()
-
 # Perform First time setup
 setup = Setup(connection)
-
 
 # URL Route definitions #
 
