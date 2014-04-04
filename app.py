@@ -24,8 +24,8 @@ from python.details import Details
 app = flask.Flask(__name__)
 
 # Establish connection to MongoDB
-connection = MongoClient("mongodb://heroku:KnOADR0_C2vVWJoOtj0WsvuKm1i-RrNZdO1QIGwhkHMQFAhRrYY4v4bUksbd3FdCE6ne78Z1o2muBT6W_39dXQ@oceanic.mongohq.com:10032/app23744423")
-# connection = MongoClient(os.environ['MONGOHQ_URL'])
+MONGO_URL = os.environ['MONGOHQ_URL']
+connection = MongoClient(MONGO_URL)
 
 # Perform First time setup
 setup = Setup(connection)

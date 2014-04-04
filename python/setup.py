@@ -22,14 +22,13 @@ class Setup():
         self.public_users_url = "https://api.github.com/users"
         self.auth = HTTPBasicAuth('cathaldcronin1', 'Zelda#0018')
 
-        print connection["app23744423"]["language_connections"]
-        self.client = connection["app23744423"]
-        self.db = self.client
+        # self.client = connection["app23744423"]
+        self.db = connection.app23744423
         self.language_connections = self.db.language_connections
         self.languages = self.db.languages
 
         # Check if database is populated with information.
-        setup = self.isSetup(self.client)
+        setup = self.isSetup(self.db)
 
         if not setup:
             print "Performing First Time Setup"
@@ -266,8 +265,9 @@ class Setup():
             Returns:
                 * Boolean value if database exits or not.
         """
-        # databases = client.database_names()
-        # if "language_database" in databases:
-            # return True
-        # else:
-        return False
+        print client.collection_names()
+        tables = client.collection_names()
+        if "language_connections" in tables:
+            return True
+        else:
+            return False
