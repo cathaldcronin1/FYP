@@ -8,12 +8,10 @@
 """
 
 import subprocess
+import os
 
 import flask, flask.views
 from pymongo import MongoClient
-
-# Establish connection to MongoDB
-connection = MongoClient(os.environ['MONGOHQ_URL'])
 
 from python.main import Main
 from python.graph import GraphData
@@ -22,9 +20,11 @@ from python.setup import Setup
 from python.filter import Filter
 from python.details import Details
 
-
 # Create Flask Instance
 app = flask.Flask(__name__)
+
+# Establish connection to MongoDB
+connection = MongoClient(os.environ['MONGOHQ_URL'])
 
 # Perform First time setup
 setup = Setup(connection)
