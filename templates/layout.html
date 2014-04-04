@@ -1,0 +1,73 @@
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Data Mining & Visualisation</title>
+    <link rel="stylesheet" href="http://getbootstrap.com/2.3.2/assets/css/bootstrap.css">
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+
+    <!-- Project Depandancy Libs -->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src= "static/libs/raphael.js"></script>
+    <script type="text/javascript" src= "static/libs/dracula_graffle.js"></script>
+    <script type="text/javascript" src= "static/libs/dracula_graph.js")></script>
+    <script type="text/javascript" src= "static/libs/raphael.pan-zoom.js")></script>
+    <script type="text/javascript" src= "static/javascript/drawGraph.js"></script>
+    <script type="text/javascript" src= "static/javascript/filterGraph.js"></script>
+    <!-- Needed for sending data to backend. -->
+    <script type="text/javascript">
+        var $SCRIPT_ROOT = {{ request.script_root|tojson|safe }};
+    </script>
+  </head>
+  <div class="navbar navbar-inverse">
+    <div class="navbar-inner">
+      <div class="container">
+        <div class="navbar-header">
+              <a class="navbar-brand" href="/"> Inter-Connectivity of Programming Languages</a>
+        </div>
+          <ul class="navbar-form pull-right">
+            <a class="btn btn-primary btn-large" id="filter-panel-button">Filter Panel</a>
+          </ul>
+      </div>
+    </div>
+  </div>
+  <div id="filter-panel" class="panel panel-primary">
+    <div id="optionsCheckboxes" class="panel-heading">
+      <button class="close" id="filter-panel-close-button">
+        <span id="close-panel-x" class="glyphicon  glyphicon-remove-circle"></span>
+      </button>
+      <h3 class="panel-title">Languages to Filter By</h3>
+    </div>
+    <div class="panel-body">
+      <!-- <div id="control-group" class="control-group"> -->
+        <!-- Language column 1 -->
+        <div id="filter-col1" class="controls span2">
+
+        </div>
+
+        <!-- Language column 2 -->
+        <div id="filter-col2" class="controls span2">
+
+        </div>
+
+        <!-- Language column 3 -->
+        <div id="filter-col3" class="controls span2">
+
+        </div>
+    </div>
+      <div class="panel-footer ">
+        <button class="btn btn-primary " id="filter">Filter</button>
+      </div>
+  </div>
+  {% block body %}
+
+  {% endblock %}
+</html>
