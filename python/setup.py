@@ -16,16 +16,15 @@ class Setup():
 
         If database exists script doesn't need to execute.
         otherwise performs initialisation.
-
     """
 
     def __init__(self, connection):
         self.public_users_url = "https://api.github.com/users"
         self.auth = HTTPBasicAuth('cathaldcronin1', 'Zelda#0018')
 
-        print connection
-        self.client = connection
-        self.db = self.client.language_database
+        print connection["app23744423"]["language_connections"]
+        self.client = connection["app23744423"]
+        self.db = self.client
         self.language_connections = self.db.language_connections
         self.languages = self.db.languages
 
@@ -267,8 +266,8 @@ class Setup():
             Returns:
                 * Boolean value if database exits or not.
         """
-        databases = client.database_names()
-        if "language_database" in databases:
-            return True
-        else:
-            return False
+        # databases = client.database_names()
+        # if "language_database" in databases:
+            # return True
+        # else:
+        return False
