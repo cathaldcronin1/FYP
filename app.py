@@ -22,9 +22,11 @@ from python.details import Details
 
 
 # Establish connection to MongoDB
-connection = MongoClient("mongodb://heroku:KnOADR0_C2vVWJoOtj0WsvuKm1i-RrNZdO1QIGwhkHMQFAhRrYY4v4bUksbd3FdCE6ne78Z1o2muBT6W_39dXQ@oceanic.mongohq.com:10032/app23744423")
-# MONGO_URL =os.environ['MONGOHQ_URL']
-# connection = MongoClient(MONGO_URL)
+MONGO_URL =os.environ['MONGOHQ_URL']
+connection = MongoClient(MONGO_URL)
+
+# Get database
+database = connection.app23744423
 
 
 # Create Flask Instance and set PORT
@@ -42,17 +44,17 @@ app.add_url_rule('/',
 
 # Graph Overview.
 app.add_url_rule('/_gather_graph_data',
-                 view_func=GraphData.as_view('graphOverview', connection),
+                 view_func=GraphData.as_view('graphOverview', database),
                  methods=["GET"])
 
 # Filter Data.
 app.add_url_rule('/_filter_data',
-                 view_func=Filter.as_view('filter', connection),
+                 view_func=Filter.as_view('filter', database),
                  methods=["POST"])
 
 # Node Details.
 app.add_url_rule('/_get_node_details',
-                 view_func=Details.as_view('details', connection),
+                 view_func=Details.as_view('details', database),
                  methods=["POST"])
 
 # Shutdown server.
@@ -68,4 +70,5 @@ def page_not_found(error):
 
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5000))
+    app.debug = True
     app.run(host='0.0.0.0', port=port)

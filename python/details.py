@@ -39,9 +39,9 @@ class Details(flask.views.MethodView):
         """
 
         filtered_data = []
-        db_data = dbHelper.get_language_data_from_db(self.db)
+        language_connection_data, count_values  = dbHelper.get_language_data_from_db(self.db)
 
-        for pair in db_data:
+        for pair in language_connection_data:
             language_connection = pair.get("connection")
 
             if language == language_connection[0] or language == language_connection[1]:

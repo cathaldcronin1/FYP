@@ -4,6 +4,7 @@
 """
 import flask, flask.views
 from flask import jsonify
+import dbHelper
 
 class GraphData(flask.views.MethodView):
     def __init__(self, dbConnection):
@@ -27,27 +28,10 @@ class GraphData(flask.views.MethodView):
                      {'count': 26, 'connection': [u'Python', u'Ruby']}]
         """
 
-        language_connection_data = []
-        count_values = []
+        # Get database information
+        language_connection_data, count_values = dbHelper.get_language_data_from_db(self.db)
 
-        # Get database.
-        language_db = self.db['language_database']
-
-        # Get tables.
-        language_pairs = language_db['language_connections']
-        languages = language_db['languages']
-
-        # Get all data in tables.
-        db_langauge_data = list(language_pairs.find())
-
-        for pair in db_langauge_data:
-            count = pair.get("count")
-            count_values.append(count)
-            connection = pair.get("connection")
-
-            language_connection_data.append({"count": count, "connection": connection})
-
-
+        languages = self.db['languages']
         languages_data = list(languages.find())
         languages_data = languages_data[0].get("languages")
 
