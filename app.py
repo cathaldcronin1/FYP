@@ -20,12 +20,15 @@ from python.setup import Setup
 from python.filter import Filter
 from python.details import Details
 
-# Create Flask Instance
-app = flask.Flask(__name__)
 
 # Establish connection to MongoDB
-MONGO_URL = os.environ['MONGOHQ_URL']
-connection = MongoClient(MONGO_URL)
+connection = MongoClient("mongodb://heroku:KnOADR0_C2vVWJoOtj0WsvuKm1i-RrNZdO1QIGwhkHMQFAhRrYY4v4bUksbd3FdCE6ne78Z1o2muBT6W_39dXQ@oceanic.mongohq.com:10032/app23744423")
+# MONGO_URL =os.environ['MONGOHQ_URL']
+# connection = MongoClient(MONGO_URL)
+
+
+# Create Flask Instance and set PORT
+app = flask.Flask(__name__)
 
 # Perform First time setup
 setup = Setup(connection)
@@ -62,5 +65,7 @@ app.add_url_rule('/shutdown',
 def page_not_found(error):
     return flask.render_template('404.html'), 404
 
-app.debug = True
-app.run()
+
+if __name__ == "__main__":
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host='0.0.0.0', port=port)
