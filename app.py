@@ -24,7 +24,7 @@ from python.details import Details
 app = flask.Flask(__name__)
 
 # Establish connection to MongoDB
-connection = MongoClient(os.environ['MONGOHQ_URL'])
+connection = MongoClient("mongodb://cathal:Zelda#0018@oceanic.mongohq.com:10032/app23744423")
 
 # Perform First time setup
 setup = Setup(connection)
