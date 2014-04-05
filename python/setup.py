@@ -264,7 +264,7 @@ class Setup():
             Returns:
                 * Boolean value if database exits or not.
         """
-        print client.collection_names()
+        # print client.collection_names()
         tables = client.collection_names()
         if "language_connections" in tables:
             return True

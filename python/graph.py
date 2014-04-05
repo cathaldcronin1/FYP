@@ -30,7 +30,6 @@ class GraphData(flask.views.MethodView):
 
         # Get database information
         language_connection_data, count_values = dbHelper.get_language_data_from_db(self.db)
-
         languages = self.db['languages']
         languages_data = list(languages.find())
         languages_data = languages_data[0].get("languages")

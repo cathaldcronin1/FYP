@@ -25,6 +25,9 @@ from python.refresh import Refresh
 MONGO_URL = os.environ['MONGOHQ_URL']
 connection = MongoClient(MONGO_URL)
 
+# database
+database = connection.app23744423
+
 # Create Flask Instance and set PORT
 app = flask.Flask(__name__)
 
@@ -40,17 +43,17 @@ app.add_url_rule('/',
 
 # Graph Overview.
 app.add_url_rule('/_gather_graph_data',
-                 view_func=GraphData.as_view('graphOverview', connection),
+                 view_func=GraphData.as_view('graphOverview', database),
                  methods=["GET"])
 
 # Filter Data.
 app.add_url_rule('/_filter_data',
-                 view_func=Filter.as_view('filter', connection),
+                 view_func=Filter.as_view('filter', database),
                  methods=["POST"])
 
 # Node Details.
 app.add_url_rule('/_get_node_details',
-                 view_func=Details.as_view('details', connection),
+                 view_func=Details.as_view('details', database),
                  methods=["POST"])
 
 # Shutdown server.
@@ -72,4 +75,5 @@ def page_not_found(error):
 
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5000))
+    app.debug = True
     app.run(host='0.0.0.0', port=port)
