@@ -18,11 +18,13 @@ from python.setup import Setup
 from python.filter import Filter
 from python.details import Details
 from python.refresh import Refresh
+from python.about import About
 
 
 # MongoDB server startup
 # Establish connection to MongoDB
-MONGO_URL = os.environ['MONGOHQ_URL']
+# MONGO_URL = os.environ['MONGOHQ_URL']
+MONGO_URL = "mongodb://heroku:YozZIUpVT2NiT7KT82kdTeD19XBEFwuo8S7S0GzhUw3bj1dcbmAbnjgDthf-jtPycqQ_YXRJWMKWVqgEsWBhqw@oceanic.mongohq.com:10032/app23744423"
 connection = MongoClient(MONGO_URL)
 
 # database
@@ -56,15 +58,17 @@ app.add_url_rule('/_get_node_details',
                  view_func=Details.as_view('details', database),
                  methods=["POST"])
 
-# Shutdown server.
-app.add_url_rule('/shutdown',
-                 view_func=Shutdown.as_view('shutdown'),
-                 methods=["GET"])
-
 # Refresh Data.
 app.add_url_rule('/_refresh_data',
                  view_func=Refresh.as_view('refresh', connection, setup),
                  methods=["GET"])
+
+# Refresh Data.
+app.add_url_rule('/about',
+                 view_func=About.as_view('about'),
+                 methods=["GET"])
+
+
 
 # Gracefully Handle 404 error.
 @app.errorhandler(404)

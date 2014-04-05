@@ -27,16 +27,20 @@
         var $SCRIPT_ROOT = {{ request.script_root|tojson|safe }};
     </script>
   </head>
-  <div class="navbar navbar-inverse">
+  <div class="navbar navbar-inverse" role="navigation">
     <div class="navbar-inner">
       <div class="container">
         <div class="navbar-header">
-              <a class="navbar-brand" href="/"> Inter-Connectivity of Programming Languages</a>
+          <a class="navbar-brand" href="/"> Inter-Connectivity of Programming Languages</a>
         </div>
-          <ul class="navbar-form pull-right">
-            <a class="btn btn-primary btn-large" id="filter-panel-button">Filter Panel</a>
-            <a class="btn btn-primary btn-large" id="refresh-data">Refresh Data</a>
-          </ul>
+        <ul class="nav navbar-nav">
+          <a class="btn btn-primary" href="/">Home</a>
+          <a class="btn btn-primary" href="/about">How it Works</a>
+        </ul>
+        <ul class="nav navbar-nav pull-right">
+          <a class="btn btn-primary btn-large" id="filter-panel-button">Filter Panel</a>
+          <a class="btn btn-success btn-large" id="refresh-data">Refresh Data</a>
+        </ul>
       </div>
     </div>
   </div>

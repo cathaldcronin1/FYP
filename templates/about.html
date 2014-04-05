@@ -1,0 +1,58 @@
+{% extends "header.html" %}
+{% block body %}
+<div class="container">
+      <div class="page-header">
+        <h1>What is this aim of this Project?</h1>
+        <p class="lead">
+            To data mine GitHub and visualise the connectivity of programming languages.
+        </p>
+      </div>
+
+      <h3>What is "Inter-Connectivity?"</h3>
+        <p>
+          Inter-Connectivity is how connected a pair of languages are. Visualising this shows how popular certain programming languages are and seeing what combinations are most used amongst the GitHub community.
+        </p>
+
+      <h3>Data Gathering Process - 6 Steps</h3>
+        <p>
+          I used the GitHub API to gather all the data required to perform analysis. All data received from GitHub is in JSON format. Retrieval and Analysis of the data happens on application startup and is then stored in a MongoDB database for retrieval later.
+        </p>
+        <h3 class="lead">Step 1 - Gather Users From GitHub</h3>
+          <p> Using GitHub's API A list of 100 users was gathered. 100 users was enough of a sampling size to achieve the visualisation. As well as this there is a limit on how much information can be processed and stored in the backend database while having no expense for database usage. The JSON data returned contains a key piece of information that gives repository information for a user. The key is called <b>"repos_url"</b> This is stored for each user.
+            <p><b>Request Made:</b> "https://api.github.com/users"</p>
+            <pre><li>Snippet of Data Returned From GitHub</li>[
+  {
+    "login": "octocat",
+    "id": 1,
+    "repos_url": "https://api.github.com/users/octocat/repos",
+  }
+]</pre>
+        <h3 class="lead">Step 2 - Gather Each Users Repository Details</h3>
+          <p>
+             On GitHub all users have a list of projects, which they are the owner of.
+             Each project will have a primary language associated with it.
+             This language is recorded for each project that the user has.
+          </p>
+           A list is compiled that contains a list of all languages used by each user.
+
+          <p><b>NOTE - Data is Normalised. i.e. A language can appear multiple times for a user only but this language is only stored once. The aim was to see how languages were connected amongst other users so it was not necessary to track a language multiple times for a user, for the visualisation I was trying to achieve.</b></p>
+          <pre>
+            {'languages': [u'C', u'Erlang', u'JavaScript', u'Perl', u'Scheme', u'Ruby']},
+            {'languages': [u'Emacs Lisp', u'Objective-C', u'JavaScript', u'Ruby', u'CoffeeScript']},
+            {'languages': [u'Python', u'JavaScript', u'Ruby']}</pre>
+        </p>
+
+        <h3 class="lead">Step 3 - Create Language Pairs</h3>
+          <p>For each list of languages found per user. Pairings were created, where each language found was paired with each other language.</p>
+            <pre><p>E.g. {'languages': [u'Python', u'JavaScript', u'Ruby']}</p><h5><b>Pairings created would be:</b></h5><li>(Python, JavaScript)</li><li>(Python, Ruby)</li><li>(JavaScript, Ruby)</li></pre>
+        <h3 class="lead">Step 4 - Count Occurrences of Pairs</h3>
+          <p> With a list of all pairings created, Each pairing is counted. This count value determines how often that pair of languages was seen together.</p>
+        <h3 class="lead">Step 5 - Format Occurrences With Pairings</h3>
+          <p> With the number of occurrences for each pair of languages gathered. The information is formatted to be stored into a MongoDB database.</p>
+            <pre><ul><b>Example of language pairs mapped to the number of occurrences of that pairing:</b><li>{'count': 3,  'connection': [u'C', u'Erlang']}</li><li>{'count': 24, 'connection': [u'C', u'JavaScript']}</li><li>{'count': 6,  'connection': [u'C', u'Perl']}</li><li>{'count': 1,  'connection': [u'C', u'Scheme']}</li><li>{'count': 25, 'connection': [u'C', u'Ruby']}</li><li>{'count': 10, 'connection': [u'Erlang', u'JavaScript']}</li></ul></pre>
+          </p>
+        <h3 class="lead">Step 6 - Store Data in Database</h3>
+          <p> The data is now ready to be stored in the database. MongoDB was used for this and stores informations as a JSON structure.</p>
+          <p> Each row of a table is stored as one of the mappings above in step 5</p>
+</div>
+{% endblock %}
