@@ -25,9 +25,6 @@ from python.refresh import Refresh
 MONGO_URL = os.environ['MONGOHQ_URL']
 connection = MongoClient(MONGO_URL)
 
-# Get database
-database = connection.language_database
-
 # Create Flask Instance and set PORT
 app = flask.Flask(__name__)
 
@@ -43,17 +40,17 @@ app.add_url_rule('/',
 
 # Graph Overview.
 app.add_url_rule('/_gather_graph_data',
-                 view_func=GraphData.as_view('graphOverview', database),
+                 view_func=GraphData.as_view('graphOverview', connection),
                  methods=["GET"])
 
 # Filter Data.
 app.add_url_rule('/_filter_data',
-                 view_func=Filter.as_view('filter', database),
+                 view_func=Filter.as_view('filter', connection),
                  methods=["POST"])
 
 # Node Details.
 app.add_url_rule('/_get_node_details',
-                 view_func=Details.as_view('details', database),
+                 view_func=Details.as_view('details', connection),
                  methods=["POST"])
 
 # Shutdown server.
