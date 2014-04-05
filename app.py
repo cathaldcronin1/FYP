@@ -19,7 +19,7 @@ from python.shutdown import Shutdown
 from python.setup import Setup
 from python.filter import Filter
 from python.details import Details
-from python.refresh import Refresh
+# from python.refresh import Refresh
 
 
 # Establish connection to MongoDB
