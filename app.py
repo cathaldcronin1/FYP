@@ -21,13 +21,11 @@ from python.details import Details
 from python.refresh import Refresh
 
 
-# # Establish connection to MongoDB
-# MONGO_URL = os.environ['MONGOHQ_URL']
-# connection = MongoClient(MONGO_URL)
-
 # MongoDB server startup
-subprocess.Popen(['C:\\mongodb\\bin\\mongod', '--config', 'c:\\mongodb\\bin\\mongodb.config'])
-connection = MongoClient()
+# Establish connection to MongoDB
+MONGO_URL = os.environ['MONGOHQ_URL']
+connection = MongoClient(MONGO_URL)
+
 # Get database
 database = connection.language_database
 
@@ -78,5 +76,4 @@ def page_not_found(error):
 
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5000))
-    app.debug = True
     app.run(host='0.0.0.0', port=port)
