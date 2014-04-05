@@ -6,7 +6,7 @@ from flask import jsonify
 
 class Refresh(flask.views.MethodView):
     def __init__(self, dbConnection, setup):
-        self.db = dbConnection
+        self.db = dbConnection.app23744423
         self.setup = setup
 
     def get(self):
