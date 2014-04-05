@@ -7,6 +7,7 @@
     Each URL route maps a URL of the application to a back-end python function
 """
 import os
+import subprocess
 
 import flask, flask.views
 from pymongo import MongoClient
@@ -20,12 +21,15 @@ from python.details import Details
 from python.refresh import Refresh
 
 
-# Establish connection to MongoDB
-MONGO_URL = os.environ['MONGOHQ_URL']
-connection = MongoClient(MONGO_URL)
+# # Establish connection to MongoDB
+# MONGO_URL = os.environ['MONGOHQ_URL']
+# connection = MongoClient(MONGO_URL)
 
+# MongoDB server startup
+subprocess.Popen(['C:\\mongodb\\bin\\mongod', '--config', 'c:\\mongodb\\bin\\mongodb.config'])
+connection = MongoClient()
 # Get database
-database = connection.app23744423
+database = connection.language_database
 
 # Create Flask Instance and set PORT
 app = flask.Flask(__name__)

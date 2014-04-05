@@ -10,6 +10,13 @@ var renderer;
 var max_language_count;
 var min_language_count;
 
+$body = $("body");
+
+$(document).on({
+    ajaxStart: function() { $body.addClass("loading"); },
+    ajaxStop: function() { $body.removeClass("loading"); }
+});
+
 jQuery.extend(
     {
         getNodeDetails: function(n, nodeId)
@@ -55,19 +62,13 @@ jQuery.extend(
 {
     refreshData: function()
     {
-        var result = null;
+        $('#load-icon').show();
         $.ajax(
                 {
                     type: "GET",
-                    url: $SCRIPT_ROOT + "/_refresh_data",
-                    async : false,
-                    contentType: "application/json; charset=utf-8",
-                    success: function(data)
-                    {
-                          result = data;
-                    }
+                    url: "/_refresh_data",
+                    async : true,
                 });
-        return result;
     }
 });
 
@@ -208,18 +209,9 @@ $(document).ready(function()
         });
         return set;
     };
-    var languageInfo;
-
-    $('#refresh-data').click(function()
-    {
-        // Refresh data in backend
-        languageInfo = $.refreshData();
-        console.log("data refreshed")
-    });
-
 
     /* Get all language information */
-    languageInfo = $.getLanguageInformation();
+    var languageInfo = $.getLanguageInformation();
 
     // Get language pairs and list of languages
     var language_pairs = languageInfo["value"]["language_pairs"]
@@ -295,4 +287,12 @@ $(document).ready(function()
     });
 
     $("#filter-panel").draggable();
+
+    $('#refresh-data').click(function()
+    {
+        // // Refresh data in backend
+        $('#load-icon').show();
+        $.refreshData();
+        location.reload();
+    });
 });

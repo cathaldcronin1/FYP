@@ -6,7 +6,7 @@ from flask import jsonify
 
 class Refresh(flask.views.MethodView):
     def __init__(self, dbConnection, setup):
-        self.db = dbConnection.app23744423
+        self.db = dbConnection.language_database
         self.setup = setup
 
     def get(self):
@@ -30,9 +30,6 @@ class Refresh(flask.views.MethodView):
 
         language_id = self.db.languages.insert({'languages': languages_data})
 
+
         return jsonify({"value": "True"})
-
-
-
-
 
