@@ -21,7 +21,6 @@ from python.refresh import Refresh
 
 
 # Establish connection to MongoDB
-# MONGO_URL = "mongodb://heroku:19285ed37f24889579c6cdf3a5b6bf30@oceanic.mongohq.com:10032/app23744423"
 MONGO_URL = os.environ['MONGOHQ_URL']
 connection = MongoClient(MONGO_URL)
 
@@ -63,7 +62,7 @@ app.add_url_rule('/shutdown',
 
 # Refresh Data.
 app.add_url_rule('/_refresh_data',
-                 view_func=Refresh.as_view('rerfesh', connection, setup),
+                 view_func=Refresh.as_view('refresh', connection, setup),
                  methods=["GET"])
 
 # Gracefully Handle 404 error.
