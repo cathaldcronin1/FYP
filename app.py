@@ -6,8 +6,6 @@
 
     Each URL route maps a URL of the application to a back-end python function
 """
-
-import subprocess
 import os
 
 import flask, flask.views
@@ -19,12 +17,12 @@ from python.shutdown import Shutdown
 from python.setup import Setup
 from python.filter import Filter
 from python.details import Details
-# from python.refresh import Refresh
+from python.refresh import Refresh
 
 
 # Establish connection to MongoDB
-# MONGO_URL = "mongodb://cathaldcronin1:d7410f6052cc8a81becd1e1d5fea0b07@oceanic.mongohq.com:10032/app23744423"
-MONGO_URL =os.environ['MONGOHQ_URL']
+# MONGO_URL = "mongodb://heroku:19285ed37f24889579c6cdf3a5b6bf30@oceanic.mongohq.com:10032/app23744423"
+MONGO_URL = os.environ['MONGOHQ_URL']
 connection = MongoClient(MONGO_URL)
 
 # Get database
@@ -63,13 +61,14 @@ app.add_url_rule('/shutdown',
                  view_func=Shutdown.as_view('shutdown'),
                  methods=["GET"])
 
-# # Refresh Data.
-# app.add_url_rule('/_refresh_data',
-#                  view_func=Refresh.as_view('rerfesh', connection, setup),
-#                  methods=["GET"])
+# Refresh Data.
+app.add_url_rule('/_refresh_data',
+                 view_func=Refresh.as_view('rerfesh', connection, setup),
+                 methods=["GET"])
 
 # Gracefully Handle 404 error.
 @app.errorhandler(404)
+@app.errorhandler(503)
 def page_not_found(error):
     return flask.render_template('404.html'), 404
 

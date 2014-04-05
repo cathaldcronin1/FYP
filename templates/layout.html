@@ -22,6 +22,7 @@
     <script type="text/javascript" src= "static/libs/raphael.pan-zoom.js")></script>
     <script type="text/javascript" src= "static/javascript/drawGraph.js"></script>
     <script type="text/javascript" src= "static/javascript/filterGraph.js"></script>
+    <script type="text/javascript" src= "static/javascript/refreshData.js"></script>
     <!-- Needed for sending data to backend. -->
     <script type="text/javascript">
         var $SCRIPT_ROOT = {{ request.script_root|tojson|safe }};
@@ -35,6 +36,7 @@
         </div>
           <ul class="navbar-form pull-right">
             <a class="btn btn-primary btn-large" id="filter-panel-button">Filter Panel</a>
+            <a class="btn btn-primary btn-large" id="refresh-data">Refresh Data</a>
           </ul>
       </div>
     </div>

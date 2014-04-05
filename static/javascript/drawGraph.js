@@ -51,6 +51,27 @@ jQuery.extend(
     }
 });
 
+jQuery.extend(
+{
+    refreshData: function()
+    {
+        var result = null;
+        $.ajax(
+                {
+                    type: "GET",
+                    url: $SCRIPT_ROOT + "/_refresh_data",
+                    async : false,
+                    contentType: "application/json; charset=utf-8",
+                    success: function(data)
+                    {
+                          result = data;
+                    }
+                });
+        return result;
+    }
+});
+
+
 function popUp(n, nodeId)
 {
     var nodeDetails = $.getNodeDetails(n, nodeId);
@@ -187,10 +208,18 @@ $(document).ready(function()
         });
         return set;
     };
+    var languageInfo;
+
+    $('#refresh-data').click(function()
+    {
+        // Refresh data in backend
+        languageInfo = $.refreshData();
+        console.log("data refreshed")
+    });
 
 
     /* Get all language information */
-    var languageInfo = $.getLanguageInformation();
+    languageInfo = $.getLanguageInformation();
 
     // Get language pairs and list of languages
     var language_pairs = languageInfo["value"]["language_pairs"]
