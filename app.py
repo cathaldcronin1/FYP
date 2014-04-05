@@ -7,7 +7,6 @@
     Each URL route maps a URL of the application to a back-end python function
 """
 import os
-import subprocess
 
 import flask, flask.views
 from pymongo import MongoClient
