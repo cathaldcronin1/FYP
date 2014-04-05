@@ -22,7 +22,6 @@ class Setup():
         self.public_users_url = "https://api.github.com/users"
         self.auth = HTTPBasicAuth('cathaldcronin1', 'Zelda#0018')
 
-        # self.client = connection["app23744423"]
         self.db = connection.app23744423
         self.language_connections = self.db.language_connections
         self.languages = self.db.languages
