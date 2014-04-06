@@ -23,8 +23,7 @@ from python.about import About
 
 # MongoDB server startup
 # Establish connection to MongoDB
-# MONGO_URL = os.environ['MONGOHQ_URL']
-MONGO_URL = "mongodb://heroku:YozZIUpVT2NiT7KT82kdTeD19XBEFwuo8S7S0GzhUw3bj1dcbmAbnjgDthf-jtPycqQ_YXRJWMKWVqgEsWBhqw@oceanic.mongohq.com:10032/app23744423"
+MONGO_URL = os.environ['MONGOHQ_URL']
 connection = MongoClient(MONGO_URL)
 
 # database
@@ -60,7 +59,7 @@ app.add_url_rule('/_get_node_details',
 
 # Refresh Data.
 app.add_url_rule('/_refresh_data',
-                 view_func=Refresh.as_view('refresh', connection, setup),
+                 view_func=Refresh.as_view('refresh', database, setup),
                  methods=["GET"])
 
 # Refresh Data.

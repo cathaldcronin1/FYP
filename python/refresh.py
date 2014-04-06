@@ -18,8 +18,8 @@ class Refresh(flask.views.MethodView):
     def refresh_data(self):
         """ """
         # Drop tables
-        self.db.language_connections.drop()
-        self.db.languages.drop()
+        self.db.drop_collection("language_connections")
+        self.db.drop_collection("languages")
 
         # re-setup again.
         language_connections_data, languages_data = self.setup.gather_language_information()
