@@ -5,4 +5,3 @@ Werkzeug==0.9.4
 itsdangerous==0.23
 pymongo==2.6.3
 requests==2.2.1
-wx==1.0.0
