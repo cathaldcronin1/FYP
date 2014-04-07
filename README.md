@@ -1,4 +1,4 @@
-FYP
+FYP - Data Mining & Visulisation
 ===
 
 Data Mining &amp; Visualisation 
