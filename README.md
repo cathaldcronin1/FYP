@@ -7,7 +7,7 @@ Data Mining &amp; Visualisation
 
 * Availible here: http://language-connectivity.herokuapp.com/
 
-**Output showing language connectivity.**
+**Output Showing Language Connectivity.**
 ===
 
 The thicker an edge connection between nodes is, the more popular or more used this language is.
