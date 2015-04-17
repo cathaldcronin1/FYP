@@ -1,6 +1,10 @@
 FYP - Data Mining & Visulisation
 ===
 
+For further reading I've also wrote a techincal report with the University of Limerick on my FYP which includes much more detail about it!
+
+**Technical Report:** https://www.researchgate.net/publication/271503999_Visualisation_of_GitHubs_Public_Data
+
 *Overview*
 ===
 This visualisation represents the current state (at any given moment) of the relationship between
@@ -24,3 +28,8 @@ Data Mining &amp; Visualisation
 The thicker an edge connection between nodes is, the more popular or more used this language is.
 Likewise a small edge thickness indicates this language pair isn't as widely used.
 ![alt tag](http://i.imgur.com/4OtaSYy.jpg)
+
+**Approach to Solving**
+===
+![alt](http://i.imgur.com/4E07NfX.jpg)
+
