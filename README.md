@@ -7,19 +7,9 @@ Data Mining &amp; Visualisation
 
 * Availible here: http://language-connectivity.herokuapp.com/
 
-To run locally
-===============
+** Output showing language connectivity. **
+===
 
-* Download or clone the project to your computer and extract it.
-
-* Install the depandancies in the requirements.txt*
-
-  **(use pip install -r requirements.txt)
-
-* MongoDB needs to be installed and running before starting the application.
-
-* Once MongoDb Server is installed and running.
-
-* run python app.py
-
-* Open a browser and go to localhost:5000
+The thicker an edge connection between nodes is, the more popular or more used this language is.
+Likewise a small edge thickness indicates this language pair isn't as widely used.
+![alt tag](http://i.imgur.com/4OtaSYy.jpg)
